@@ -5,25 +5,9 @@
     <title>Calculator</title>
 </head>
 <body>
-<form method="POST" action="/">
-    <h2>Введіть значення:</h2>
-    {{ range .Measurements }}
-    <label for="{{.Name}}">{{.Label}},&nbsp;</label>
-    <input type="text" name="{{.Name}}" id="{{.Name}}" value="{{.Value}}"/>
-    <span>&nbsp;{{.Units}}</span>
-    <br>
-    <br>
-    {{ end }}
-    <input type="submit" value="Обчислити" />
-    <br><br><hr><br>
-
-    {{ if .Error }}
-    <p style="color:red;">{{ .Error }}</p>
-    {{ end }}
-
-    {{ range .CalcResult }}
-    <p>{{ .Label }}: {{ .Value }} {{ .Units }}</p>
-    {{ end }}
-</form>
+<h1>Оберіть калькулятор: </h1>
+<a href="/cable"><p>Кабель</p></a>
+<a href="/short_circuit"><p>Струм КЗ</p></a>
+<a href="/hpnem"><p>Струм КЗ ХПнЕМ</p></a>
 </body>
 </html>

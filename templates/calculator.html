@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator</title>
+</head>
+<body>
+<a href="/">На головну</a>
+<form method="POST">
+    <h2>Введіть значення:</h2>
+
+    {{ range .Measurements }}
+    <label for="{{.Name}}">{{.Label}},&nbsp;</label>
+    <input type="text" name="{{.Name}}" id="{{.Name}}" value="{{.Value}}"/>
+    <span>&nbsp;{{.Units}}</span>
+    <br>
+    <br>
+    {{ end }}
+
+    {{ range .Selectors }}
+        {{ $selector := . }}
+        <p>{{.Label}}</p>
+        {{ range $key, $value := .Options }}
+            <input type="radio"
+                   id="{{ $key }}"
+                   name="{{ $selector.Name }}"
+                   value="{{ $key }}"
+                   {{ if eq $key $selector.Value }}checked{{ end }} />
+            <label for="{{ $key }}">{{ $value }}</label>
+        {{ end }}
+        <br><br>
+    {{ end }}
+
+    <input type="submit" value="Обчислити" />
+    <br><br><hr><br>
+
+    {{ if .Error }}
+    <p style="color:red;">{{ .Error }}</p>
+    {{ end }}
+
+    {{ range .CalcResult }}
+    <p>{{ .Label }}: {{ .Value }} {{ .Units }}</p>
+    {{ end }}
+</form>
+</body>
+</html>
